@@ -1,6 +1,4 @@
-PROJ = example
-# PROJ = rs232demo
-# PROJ = stopwatch
+PROJ = stopwatch
 
 all: $(PROJ).rpt $(PROJ).bin
 
