@@ -17,9 +17,11 @@ module top (
 	reg [20:0] clkdiv = 0;
 	reg clkdiv_pulse = 0;
 
-	reg running = 0;
-
-	assign {LED1, LED2, LED3, LED4, LED5} = {5{!display_value[15:4]}};
+	assign LED1 = !BTN_N;
+	assign LED2 = BTN1;
+	assign LED3 = BTN2;
+	assign LED4 = BTN3;
+	assign LED5 = (BTN1 + BTN2 + BTN3 + 2'b00) >> 1;
 
 	always @(posedge CLK) begin
 		if (clkdiv == 120000) begin
@@ -30,24 +32,8 @@ module top (
 			clkdiv_pulse <= 0;
 		end
 
-		if (clkdiv_pulse && running) begin
+		if (clkdiv_pulse) begin
 			display_value <= display_value_inc;
-		end
-
-		// left button: start
-		if (BTN3) begin
-			running <= 1;
-		end
-
-		// right button: stop
-		if (BTN1) begin
-			running <= 0;
-		end
-
-		// reset
-		if (!BTN_N) begin
-			display_value <= 0;
-			running <= 0;
 		end
 	end
 
@@ -63,10 +49,7 @@ module top (
 		.dout(seven_segment_bot)
 	);
 
-	bcd16_increment bot_inc (
-		.din(display_value),
-		.dout(display_value_inc)
-	);
+	assign display_value_inc = display_value + 16'b1;
 endmodule
 
 module bcd16_increment (
