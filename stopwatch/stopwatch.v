@@ -10,8 +10,6 @@ module top (
 
 	reg [15:0] display_value = 0;
 	wire [15:0] display_value_inc;
-	reg [15:0] lap_value = 0;
-	reg [7:0] lap_timeout = 0;
 
 	assign { P1A10, P1A9, P1A8, P1A7, P1A4, P1A3, P1A2, P1A1 } = seven_segment_top;
 	assign { P1B10, P1B9, P1B8, P1B7, P1B4, P1B3, P1B2, P1B1 } = seven_segment_bot;
@@ -36,19 +34,9 @@ module top (
 			display_value <= display_value_inc;
 		end
 
-		if (clkdiv_pulse && lap_timeout) begin
-			lap_timeout <= lap_timeout - 1;
-		end
-
 		// left button: start
 		if (BTN3) begin
 			running <= 1;
-		end
-
-		// center button: lap
-		if (BTN2) begin
-			lap_value <= display_value;
-			lap_timeout <= 200;
 		end
 
 		// right button: stop
@@ -65,13 +53,13 @@ module top (
 
 	seven_seg_ctrl seven_segment_ctrl_top (
 		.CLK(CLK),
-		.din(lap_timeout ? lap_value[15:8] : display_value[15:8]),
+		.din(display_value[15:8]),
 		.dout(seven_segment_top)
 	);
 
 	seven_seg_ctrl seven_segment_ctrl_bot (
 		.CLK(CLK),
-		.din(lap_timeout ? lap_value[7:0] : display_value[7:0]),
+		.din(display_value[7:0]),
 		.dout(seven_segment_bot)
 	);
 
