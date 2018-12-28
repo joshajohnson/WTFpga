@@ -1,34 +1,34 @@
-PROJ = example
+# PROJ = example
 # PROJ = rs232demo
-# PROJ = stopwatch
+PROJ = stopwatch
 
 all: $(PROJ).rpt $(PROJ).bin
 
-%.json: %.v
-	yosys -p 'synth_ice40 -top top -json $@' $<
+$(PROJ).json: $(PROJ).v
+	yosys -ql $(PROJ).yslog -p 'synth_ice40 -top top -json $@' $<
 
-%.asc: %.json icebreaker.pcf
-	nextpnr-ice40 --up5k --freq 12 --asc $@ --pcf icebreaker.pcf --json $<
+$(PROJ).asc: $(PROJ).json icebreaker.pcf
+	nextpnr-ice40 -ql $(PROJ).nplog --up5k --freq 12 --asc $@ --pcf icebreaker.pcf --json $<
 
-%.bin: %.asc
+$(PROJ).bin: $(PROJ).asc
 	icepack $< $@
 
-%.rpt: %.asc
-	icetime -d up5k -mtr $@ $<
+$(PROJ).rpt: $(PROJ).asc
+	icetime -d up5k -c 12 -mtr $@ $<
 
-%_tb: %_tb.v %.v
+$(PROJ)_tb: $(PROJ)_tb.v $(PROJ).v
 	iverilog -o $@ $^
 
-%_tb.vcd: %_tb
+$(PROJ)_tb.vcd: $(PROJ)_tb
 	vvp -N $< +vcd=$@
 
-%_syn.v: %.json
+$(PROJ)_syn.v: $(PROJ).json
 	yosys -p 'read_json $^; write_verilog $@'
 
-%_syntb: %_tb.v %_syn.v
+$(PROJ)_syntb: $(PROJ)_tb.v $(PROJ)_syn.v
 	iverilog -o $@ $^ `yosys-config --datdir/ice40/cells_sim.v`
 
-%_syntb.vcd: %_syntb
+$(PROJ)_syntb.vcd: $(PROJ)_syntb
 	vvp -N $< +vcd=$@
 
 prog: $(PROJ).bin
@@ -39,7 +39,7 @@ sudo-prog: $(PROJ).bin
 	sudo iceprog $<
 
 clean:
-	rm -f $(PROJ).json $(PROJ).asc $(PROJ).rpt $(PROJ).bin
+	rm -f $(PROJ).yslog $(PROJ).nplog $(PROJ).json $(PROJ).asc $(PROJ).rpt $(PROJ).bin
 	rm -f $(PROJ)_tb $(PROJ)_tb.vcd $(PROJ)_syn.v $(PROJ)_syntb $(PROJ)_syntb.vcd
 
 .SECONDARY:

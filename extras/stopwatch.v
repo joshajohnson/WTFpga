@@ -5,20 +5,23 @@ module top (
 	output P1A1, P1A2, P1A3, P1A4, P1A7, P1A8, P1A9, P1A10,
 	output P1B1, P1B2, P1B3, P1B4, P1B7, P1B8, P1B9, P1B10
 );
-	wire [7:0] ss_top, ss_bot;
-	reg [7:0] disp_top = 0, disp_bot = 0;
-	reg [7:0] lap_top = 0, lap_bot = 0;
+	wire [7:0] seven_segment_top;
+	wire [7:0] seven_segment_bot;
+
+	reg [15:0] display_value = 0;
+	wire [15:0] display_value_inc;
+	reg [15:0] lap_value = 0;
 	reg [7:0] lap_timeout = 0;
 
-	wire [7:0] disp_top_inc, disp_bot_inc;
-	
-	assign { P1A10, P1A9, P1A8, P1A7, P1A4, P1A3, P1A2, P1A1 } = ss_top;
-	assign { P1B10, P1B9, P1B8, P1B7, P1B4, P1B3, P1B2, P1B1 } = ss_bot;
+	assign { P1A10, P1A9, P1A8, P1A7, P1A4, P1A3, P1A2, P1A1 } = seven_segment_top;
+	assign { P1B10, P1B9, P1B8, P1B7, P1B4, P1B3, P1B2, P1B1 } = seven_segment_bot;
 
 	reg [20:0] clkdiv = 0;
 	reg clkdiv_pulse = 0;
 
 	reg running = 0;
+
+	assign {LED1, LED2, LED3, LED4, LED5} = {5{!display_value[15:4]}};
 
 	always @(posedge CLK) begin
 		if (clkdiv == 120000) begin
@@ -30,7 +33,7 @@ module top (
 		end
 
 		if (clkdiv_pulse && running) begin
-			{disp_top, disp_bot} <= {disp_top_inc, disp_bot_inc};
+			display_value <= display_value_inc;
 		end
 
 		if (clkdiv_pulse && lap_timeout) begin
@@ -44,8 +47,7 @@ module top (
 
 		// center button: lap
 		if (BTN2) begin
-			lap_top <= disp_top;
-			lap_bot <= disp_bot;
+			lap_value <= display_value;
 			lap_timeout <= 200;
 		end
 
@@ -56,26 +58,26 @@ module top (
 
 		// reset
 		if (!BTN_N) begin
-			{disp_top, disp_bot} <= 0;
+			display_value <= 0;
 			running <= 0;
 		end
 	end
 
-	seven_seg_ctrl ss_ctrl_top (
+	seven_seg_ctrl seven_segment_ctrl_top (
 		.CLK(CLK),
-		.din(lap_timeout ? lap_top : disp_top),
-		.dout(ss_top)
+		.din(lap_timeout ? lap_value[15:8] : display_value[15:8]),
+		.dout(seven_segment_top)
 	);
 
-	seven_seg_ctrl ss_ctrl_bot (
+	seven_seg_ctrl seven_segment_ctrl_bot (
 		.CLK(CLK),
-		.din(lap_timeout ? lap_bot : disp_bot),
-		.dout(ss_bot)
+		.din(lap_timeout ? lap_value[7:0] : display_value[7:0]),
+		.dout(seven_segment_bot)
 	);
 
 	bcd16_increment bot_inc (
-		.din({disp_top, disp_bot}),
-		.dout({disp_top_inc, disp_bot_inc})
+		.din(display_value),
+		.dout(display_value_inc)
 	);
 endmodule
 
