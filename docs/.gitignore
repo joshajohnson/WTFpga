@@ -1,0 +1,8 @@
+*.asc
+*.bin
+*.json
+*.log
+*.rpt
+*.aux
+*.out
+*.synctex.gz
