@@ -26,7 +26,7 @@ I would also recomend installing [Icarus Verilog](https://iverilog.fandom.com/wi
 
 For text editing I personally use Sublime Text with [SublimeLinter](https://packagecontrol.io/packages/SublimeLinter-contrib-iverilog) to help find my bugs, however I'm sure other options exist for your prefered text editor.
 
-#### Alternate Linux and Mac install instruction from V3.0 are below. 
+### Alternate Linux and Mac install instructions from V3.0 are below. 
 
 On Debian or Ubuntu you need the following dependencies:
 ``` 
