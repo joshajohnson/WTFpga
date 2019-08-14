@@ -2,19 +2,13 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsfonts,amssymb} %math related
-\usepackage{fixltx2e} %text subscript
-\usepackage{circuitikz} %circuit drawings
 \usepackage{fancyhdr} %fancy headers
 \pagestyle{fancy} %something to do with page layout
 \usepackage{float} %control over positions of figures etc
-\usepackage{gensymb} %more symbols
 \usepackage{graphicx} %importing graphics
 \usepackage{hyperref} %refrencing
-\usepackage{lipsum} %lorium ipsum
 \usepackage{relsize} %text changing sizes
 \usepackage{tabularx} %table controls
-\usepackage{tikz} %drawings
-\usetikzlibrary{calc,patterns,angles,quotes} %tikz add on
 %\usepackage{times} %times new roman font
 \usepackage{titling} %fancy titles
 \newcommand{\textsub}{\textsubscript}
@@ -68,9 +62,9 @@ The objective of this workshop is to do something cool with FPGAs in only two ho
 In order to introduce Verilog and FPGAs in such a short time, we’re going to skip over several things that will be important when you build your own FPGA-based designs, but are not necessary to kickstart your tinkering: 
 \begin{itemize}
 	\item Synchronous Logic: We’re dealing entirely with human (AKA slow) input and output today. Running at maximum performance requires synchronizing all of the logic using a common clock, and optimizing the logic to fit that enforced timing.
-	\item IP Cores​: FPGA vendors pre-build or automatically generate code to let you easily interface your FPGA to interfaces like RAM, network, or PCIe. We’ll stick to LEDs and switches today.
-	\item Simulation​: Didn’t work right the first time? Simulation lets you look at all the signals in your design without having to use hardware or potentially expensive observation equipment.
-	\item Testbenches​: For effective simulation, you need to write even more Verilog code to stimulate the inputs to your system.
+	\item IP Cores: FPGA vendors pre-build or automatically generate code to let you easily interface your FPGA to interfaces like RAM, network, or PCIe. We’ll stick to LEDs and switches today.
+	\item Simulation: Didn’t work right the first time? Simulation lets you look at all the signals in your design without having to use hardware or potentially expensive observation equipment.
+	\item Testbenches: For effective simulation, you need to write even more Verilog code to stimulate the inputs to your system.
 \end{itemize}
 
 \newpage
@@ -79,14 +73,14 @@ We will be using the not creatively named iCE40-feather board for this workshop.
 
 \begin{figure}[H]
 \begin{centering}
-	\includegraphics[width=\linewidth]{top_render.png}
+	\includegraphics[width=\linewidth]{top_render.PNG}
 	\caption{The iCE40-feather FPGA board being utilised.}
 \end{centering}
 \end{figure}
 
 \begin{figure}[H]
 \begin{centering}
-	\includegraphics[width=\linewidth]{7segment_render.png}
+	\includegraphics[width=\linewidth]{7segment_render.PNG}
 	\caption{The seven segment and DIP switch FeatherWing.}
 \end{centering}
 \end{figure}
