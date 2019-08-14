@@ -1,48 +1,57 @@
 # Install Instructions
 
-We require Yosys, NextPNR, and the IceStorm tools for the workshop. 
+We require Yosys, NextPNR, and the IceStorm tools for the workshop.
 
-## Linux and Mac
+## Linux and Mac Installation
 
 Installation instructions for Linux and Mac be found [here](http://www.clifford.at/icestorm/#install).
 
-Alternate instructions can be found at the bottom of this page. 
+Alternate instructions can be found at the bottom of this page.
 
-## Windows
+## Windows Installation
 
-I have seen reports that the toolchain works fine in Windows Subsystem for Linux. I'd suggest trying that before the below suggestions. 
+To install the toolchain on your regular Windows machine (the easiest way):
 
-The below links are untested install instructions for Windows. Feel free to try them and please send a pull request if you get something to work, however the workflow is untested and will be at your own risk. 
+- Download the Icestorm Toolchain for Windows (which contains the Synthesis Tools) from: https://github.com/im-tomu/fomu.im/releases/download/td19/yosys-icestorm-nextpnr-win64.0.1.zip
+- Unzip the contents to a temporary folder, for example: `C:\temp\yosys-icestorm-nextpnr-win64.0.1`
+- Copy the `yosys-icestorm-nextpnr-win64.0.1` to `C:\` but rename it to something simple like `fpga-toolchain`, so the path becomes `C:\fpga-toolchain`. Inside your folder will be two subfolders, `bin` and `share`
+- Set an environment variable so that the toolchain commands can be run from a Command Prompt:
+  - Search Windows: `env`
+  - Select: `Edit the system environment variables`
+  - Click: `Environment Variables`
+  - Scroll to `Path` in the System variables pane and double click to select.
+  - Add a new path at the bottom: `C:\fpga-toolchain\bin`
+  - Save all dialogs.
+- Open a Command Prompt.
+- Test by trying: `iceprog --help`
 
-[Link 1](http://grbd.github.io/posts/2016/09/12/setting-up-the-icestorm-fpga-tools-for-windows/) Note: you will need to install NextPNR instead of Arachne-pnr as Arachne has been suceeded by NextPNR.
+iceprog will output it's help. You are good to go.
 
-[Link 2](https://fomu.im/td19/) Instructions from a FOMU workshop at Teardown 2019. Download the Synthesis Tools - Windows files link. 
+Thanks to Wayne for the Windows instructions. 
 
-[Link 3](https://github.com/FPGAwars/apio) APIO can be installed via Python but does not support the iCE40-feather FPGA by default. Should be possible to add it, let Josh know if he can be of any assistance. 
+## Optional Software Installation
 
-### Optional Software Installation
-
-I would also recomend installing [Icarus Verilog](https://iverilog.fandom.com/wiki/Installation_Guide) and [GTKwave](http://gtkwave.sourceforge.net/) for simulation, however this is not required for the WTFpga workshop. 
+I would also recomend installing [Icarus Verilog](https://iverilog.fandom.com/wiki/Installation_Guide) and [GTKwave](http://gtkwave.sourceforge.net/) for simulation, however this is not required for the WTFpga workshop.
 
 For text editing I personally use Sublime Text with [SublimeLinter](https://packagecontrol.io/packages/SublimeLinter-contrib-iverilog) to help find my bugs, however I'm sure other options exist for your prefered text editor.
 
-### Alternate Linux and Mac install instructions from V3.0 are below. 
+### Alternate Linux and Mac install instructions from V3.0 are below.
 
 On Debian or Ubuntu you need the following dependencies:
-``` 
+```
 sudo apt install build-essential clang bison \
 flex libreadline-dev gawk tcl-dev libffi-dev \
 git mercurial graphviz xdot pkg-config \
 python python3 libftdi-dev qt5-default \
 python3-dev libboost-all-dev git \
-libqt5opengl5-dev 
+libqt5opengl5-dev
 ```
 
 On Mac OS you will need homebrew and the following dependencies:
 
-``` 
+```
 brew install cmake python boost boost-python3 qt5 \
-git libftdi bison gperf 
+git libftdi bison gperf
 ```
 
 Now that you have all the dependencies you can clone the workshop
@@ -57,9 +66,9 @@ In the workshop repository you have to run the
 summon-fpga-tools.sh script and set your ​PATH so it can find the
 tools you just installed:
 
-``` 
+```
 ./summon-fpga-tools.sh
-export PATH=~/sft/bin:$PATH 
+export PATH=~/sft/bin:$PATH
 ```
 
 On Linux to get permissions to open the USB interface create a file
