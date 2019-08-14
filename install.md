@@ -27,19 +27,9 @@ To install the toolchain on your regular Windows machine (the easiest way):
 
 iceprog will output it's help. You are good to go.
 
-## Alternative Windows Installation instructions (untested)
+Thanks to Wayne for the Windows instructions. 
 
-I have seen reports that the toolchain works fine in Windows Subsystem for Linux. I'd suggest trying that before the below suggestions.
-
-The below links are untested install instructions for Windows. Feel free to try them and please send a pull request if you get something to work, however the workflow is untested and will be at your own risk.
-
-[Link 1](http://grbd.github.io/posts/2016/09/12/setting-up-the-icestorm-fpga-tools-for-windows/) Note: you will need to install NextPNR instead of Arachne-pnr as Arachne has been suceeded by NextPNR.
-
-[Link 2](https://fomu.im/td19/) Instructions from a FOMU workshop at Teardown 2019. Download the Synthesis Tools - Windows files link.
-
-[Link 3](https://github.com/FPGAwars/apio) APIO can be installed via Python but does not support the iCE40-feather FPGA by default. Should be possible to add it, let Josh know if he can be of any assistance.
-
-### Optional Software Installation
+## Optional Software Installation
 
 I would also recomend installing [Icarus Verilog](https://iverilog.fandom.com/wiki/Installation_Guide) and [GTKwave](http://gtkwave.sourceforge.net/) for simulation, however this is not required for the WTFpga workshop.
 
