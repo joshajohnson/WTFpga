@@ -24,7 +24,7 @@ Canberra Hardware Meetup
 =======================
 If you are looking at this in advance of the Canberra Hardware Meetup event on 9th September 2019, you have come to the right place. 
 
-Two FPGA worshops will be held in the months of September and October, and will utilise the [iCE40-feather](https://github.com/joshajohnson/iCE40-feather) dev board. 
+Two FPGA workshops will be held in the months of September and October, and will utilise the [iCE40-feather](https://github.com/joshajohnson/iCE40-feather) dev board. 
 
 The first will be this WTFpga workshop, a self guided jump into the world of FPGAs. 
 
@@ -32,7 +32,7 @@ The second will go into a bit of FPGA theory, how to simulate your designs, writ
 
 Instructions
 ============
-There are two parts required before the hardware meetup, installing software and aquiring hardware. 
+There are two parts required before the hardware meetup, installing software and acquiring hardware. 
 
 To install the required software, follow the [install instructions](install.md).
 
@@ -54,7 +54,7 @@ Version 1.0 targeted a generic Xilinx XC3S200A FPGA board using Xilinx ISE tools
 
 Version 2.0 is significantly updated, targeting a Digilent Basys 3 board and Xilinx Vivado. Posted 2018
 
-Version 3.0 targetting the iCEBreaker dev board and using fully open source sythesis flow. Posted late 2018
+Version 3.0 targeting the iCEBreaker dev board and using fully open source synthesis flow. Posted late 2018
 
 Version 4.0 ported V3.0 over to the iCE40-feather, and changed the project used for the workshop. Posted mid 2019.
 
