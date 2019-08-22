@@ -12,18 +12,19 @@ module displaySelect(
 
     // change between dec and hex display
     always @(posedge clk) begin
-        // if in hex mode, pass switches through
+        
         if (switch) begin
+            // if in hex mode, pass switches through
             nibbleMS <= sw[7:4];
             nibbleLS <= sw[3:0]; 
         end else begin
-        // if in dec mode, show lowest two digits
+    //     // // if in dec mode, show lowest two digits
             if (sw <= 99) begin
                 dispNum = sw;
-            end else if (sw <= 199) begin
-                dispNum = sw - 100;
+            // end else if (sw <= 199) begin
+            //     dispNum = sw - 100;
             end else begin
-                dispNum = sw - 200;
+                dispNum = 99;
             end
         // determine value to display in most significant display
             if (dispNum >= 7'd90) begin
