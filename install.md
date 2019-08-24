@@ -4,11 +4,15 @@ We require Yosys, NextPNR, and the IceStorm tools for the workshop.
 
 There are also some optional tools which can be installed if you desire, instructions are below.
 
-It is highly recommended to use Linux or Mac for the workshop, as there are a few quirks with the toolchain and FTDI drivers on Windows. We have included install instructions and potential workarounds for the issues, however cannot guarantee it will function smoothly. It appears that Windows Subsystem for Linux works without any issues.
+It is highly recommended to use Linux or Mac for the workshop, as there are a few quirks with the toolchain and FTDI drivers on Windows. We have included install instructions and potential workarounds for the issues, however cannot guarantee it will function smoothly. 
+
+**NOTE:** Unlike previously written, due to driver issues Windows Subsystem for Linux is **NOT** an option for running the environment. Whilst you will be able to build the required files, WSL is unable to communicate with the FTDI programmer we are using and therefore you will not be able to program your FPGA.
 
 ## Linux and Mac Installation
 
 Installation instructions for Linux and Mac be found [here](http://www.clifford.at/icestorm/#install).
+
+**NOTE:** The install instructions are missing ```libeigen3-dev``` as a dependency, make sure to ```sudo apt install libeigen3-dev``` before building the FPGA toolchain. 
 
 ## Windows Installation
 
