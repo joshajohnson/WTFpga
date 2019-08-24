@@ -17,7 +17,7 @@ module displaySelect(
             nibbleMS <= sw[7:4];
             nibbleLS <= sw[3:0]; 
         end else begin
-        // if in dec mode, show lowest two digits
+            // if in dec mode, show lowest two digits
             if (sw <= 99) begin
                 dispNum = sw;
             end else if (sw <= 199) begin
@@ -25,7 +25,7 @@ module displaySelect(
             end else begin
                 dispNum = sw - 200;
             end
-        // determine value to display in most significant display
+            // determine value to display in most significant display
             if (dispNum >= 7'd90) begin
                 nibbleMS = 4'd9;
             end else if (dispNum >= 8'd80) begin

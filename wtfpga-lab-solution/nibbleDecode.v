@@ -1,7 +1,6 @@
 `default_nettype none
 
 module nibbleDecode(
-    input clk,
     input [3:0] nibblein,
     output reg [6:0] seg
     );

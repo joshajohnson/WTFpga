@@ -10,7 +10,7 @@ module top(
     input switch,
     output [6:0] seg,
     output [1:0] anode
-);
+    );
 
 	// wires and registers go here
 	wire dividedClk;
@@ -28,15 +28,13 @@ module top(
 
 	// decodes nibble to 7 segment display	
 	nibbleDecode nibbleDecodeLSD (
-			.clk 		(clk), 
-		 	.nibblein 	(nibbleLS), 
-			.seg 		(disp0)
+	 	.nibblein 	(nibbleLS), 
+		.seg 		(disp1)
 	);
 
 	nibbleDecode nibbleDecodeMSD (
-			.clk 		(clk), 
-		 	.nibblein 	(nibbleMS), 
-			.seg 		(disp1)
+	 	.nibblein 	(nibbleMS), 
+		.seg 		(disp0)
 	);
 
 	// mux displays

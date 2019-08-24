@@ -10,46 +10,45 @@ module top(
     input switch,
     output [6:0] seg,
     output [1:0] anode
-);
+    );
 
 	// wires and registers go here
 	wire dividedClk;
 	wire [6:0] disp0, disp1;
-	wire [3:0] nibbleMS, nibbleLS;
 
-	// assignments go here
-	// assign anode = 2'b11;
-	// assign seg[6:0] = ~sw[6:0];
+	assign anode = 2'b11;
+	assign seg[0] = sw[0];
+	assign seg[1] = sw[1];
+	assign seg[2] = sw[2];
+	assign seg[3] = sw[3];
+	assign seg[4] = sw[4];
+	assign seg[5] = sw[5];
+	assign seg[6] = sw[6];
 
-	// choose what number to show on display
-	displaySelect inst_displaySelect (
-		.clk 		(clk), 
-		.sw 		(sw), 
-		.switch 	(switch), 
-		.nibbleMS 	(nibbleMS), 
-		.nibbleLS 	(nibbleLS)
-	);
+	// // choose what number to show on display
+	// displaySelect inst_displaySelect (
+	// 	.clk 		(clk), 
+	// 	.sw 		(sw), 
+	// 	.switch 	(switch), 
+	// 	.nibbleMS 	(nibbleMS), 
+	// 	.nibbleLS 	(nibbleLS)
+	// );
 
-	// decodes nibble to 7 segment display
+	// decodes nibble to 7 segment display	
 	nibbleDecode nibbleDecodeLSD (
-	 	.nibblein 	(nibbleLS), 
-		.seg 		(disp1)
+		// add ports here
 	);
 
-	nibbleDecode nibbleDecodeMSD (
-	 	.nibblein 	(nibbleMS), 
-		.seg 		(disp0)
-	);
 
-	// mux displays
-	displayMux inst_displayMux (
-		.clk        (clk),
-		.dividedClk (dividedClk),
-		.disp0      (disp0),
-		.disp1      (disp1),
-		.seg        (seg),
-		.anode      (anode)
-	);
+	// // mux displays
+	// displayMux inst_displayMux (
+	// 	.clk        (clk),
+	// 	.dividedClk (dividedClk),
+	// 	.disp0      (disp0),
+	// 	.disp1      (disp1),
+	// 	.seg        (seg),
+	// 	.anode      (anode)
+	// );
 
 	// generate clock for switching displays
 	clockDiv inst_clockDiv (
