@@ -36,14 +36,11 @@ There are two parts required before the hardware meetup, installing software and
 
 To install the required software, follow the [install instructions](install.md).
 
-**Due to demand, we no longer have any boards left.** There may be some available for loan on the night, so send Josh an email and he will put you on the list for one. You are also more than welcome to build your own, follow the above linked repo and ask Josh if you have any questions.
-~~To get your hands on hardware, send an email to ```josh at josh a johnson dot com``` or follow the above linked repo and build your own!~~
+**Due to demand, we no longer have any boards left for purchase.** There may be some available for loan on the night, so send Josh an email at ```josh at joshajohnson dot com``` and he will put you on the list for one.
 
-Due to the expense of the FPGA boards, it will cost $50, and include a seven segment / DIP switch, LED matrix, and PMOD FeatherWings. This is at cost and will be yours to keep forever.
+~Due to the expense of the FPGA boards, it will cost $50, and include a seven segment / DIP switch, LED matrix, and PMOD FeatherWings. This is at cost and will be yours to keep forever.
+These boards will be built on demand, so please get in contact with Josh ASAP if you want one. I will have spare boards if you don't want to purchase one, however make sure you email me in advance as I won't have many.~
 
-These boards will be built on demand, so please get in contact with Josh ASAP if you want one. I will have spare boards if you don't want to purchase one, however make sure you email me in advance as I won't have many. 
-
-If you want to have a go at building your own board, let me know and we can organise a time. 
 
 Once you have the software installed and hardware in hand, follow the Getting to Blinky section in the manual to ensure everything is working in advance of the workshop. 
 
