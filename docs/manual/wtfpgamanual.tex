@@ -100,12 +100,9 @@ With the toolchain installed and hardware in hand, it is now time to blink some 
 \noindent
 Now its time to walk through the process of synthesizing an FPGA design of your own and uploading it to the FPGA. We will be using the amazing open source tools called IceStorm, nextpnr and yosys. 
 \begin{itemize}
-		\item Ensure that the FPGA is connected via a USB cable to your computer. 
+		\item Ensure that the FPGA is connected via a micro USB cable to your computer, and that the cable is not missing data pins.
 		\item Open the command line in the \textbf{WTFpga/blink} folder.
 		\item Build and upload the gateware by typing \textbf{make prog} into the terminal. 
-			\begin{itemize}
-				\item NOTE: Windows users may need to run \textbf{make prog} twice due to path issues with the iceprog execuitable. 
-			\end{itemize}
 		\item Ensure that the led marked nUSR is blinking. If not it's time to begin troubleshooting!
 			\begin{itemize}
 				\item NOTE: Windows users may need to update drivers used with the FTDI IC used for USB to Serial communications. Check the install notes in \texttt{install.md}.
@@ -129,7 +126,7 @@ Now that we know how to use the tools to configure our FPGA, let’s start by ex
 \noindent
 Now let’s try and map our board’s functionality to the Verilog that makes it happen.
 \begin{itemize}
-	\item From the terminal we have open in the wtfpga-lab directory, type \textbf{make prog} and press enter to load the wtfpga project onto the FPGA. Windows users, remember you may have to run \textbf{make prog} twice due to the joys of iceprog. 
+	\item From the terminal we have open in the wtfpga-lab directory, type \textbf{make prog} and press enter to load the wtfpga project onto the FPGA. 
 	\item What happenes when you move the DIP switches?
 	\item Can you find the DIP switches in the module definition? What are they named?
 	\item Can you find the assignments which use each of the switches? What are they assigned to?
@@ -139,7 +136,7 @@ Now let’s try and map our board’s functionality to the Verilog that makes it
 \noindent
 You should be able to trace the DIP switches inputs, through a number of wires, to seven segment outputs. You should also note that the seven segment display is inverted, the reasoning of which will be explained later. 
 
-Note that these aren't sequential commands. All of these things happen at once. It dosen't actually matter what order the assgn statements occur. 
+Note that these aren't sequential commands. All of these things happen at once. It dosen't actually matter what order the assign statements occur. 
 \newpage
 \section{Making Assignments}
 Let’s start with some minor changes to our Verilog.
@@ -153,7 +150,7 @@ Next, we need to create a new configuration for our FPGA. Brace yourself - it wi
 	\item In the command line terminal that we opened earlier, type \textbf{make prog}, and press enter. 
 \end{itemize}
 \noindent
-You should see some text scroll by and the new design should be uploaded and running within a few seconds. If we were using proprietary tools (Vivado or Quartus) as we did in V1 and V2 of this workshop, the synthesis would take approximately 8 minutes depending on the computer used. We used these 8 minutes to talk about the synthesis process itself. Even though we don’t have to wait that long, let’s talk what the software is doing and what tools are used to accomplish those steps. It is a bit different from a software compiler.
+You should see some text scroll by and the new design should be uploaded and running within a few seconds. If we were using proprietary tools (Vivado or Quartus) as was done in V1 and V2 of this workshop, the synthesis would take approximately 8 minutes depending on the computer used. We used these 8 minutes to talk about the synthesis process itself. Even though we don’t have to wait that long, let’s talk what the software is doing and what tools are used to accomplish those steps. It is a bit different from a software compiler.
 
 \begin{itemize}
 	\item First, the software will synthesize the design - turn the Verilog code into basic logical blocks, optimizing it in the process using yosys. (http://www.clifford.at/yosys/)
@@ -232,17 +229,17 @@ Whilst in previous editions of this workshop a calculator was implemented to dem
 
 \begin{itemize}
 	\item Open \textbf{wtfpga.v} in your text editor. 
-	\item Un-comment the instantiation of \textbf{displaySelect}.
+	\item Un-comment the instantiation of \textbf{displaySelect}..
 	\item We will use \textbf{displaySelect} to take the binary value of the DIP switches \textbf{sw}, along with the state of the \textbf{switch} on the left of the seven segment display, to output either decimal or hexadecimal values through \textbf{nibbleMS} and \textbf{nibbleLS} to display on the seven segment display. 
 	\item Instead of connecting the switches directly to the decoders, we need to route them through the \textbf{displaySelect} module. 
-	\item Define two \textbf{wires}, \textbf{nibbleMS} and \textbf{nibbleLS} of width \textbf{[3:0]} to act as intermediary signals.
+	\item In \textbf{wtfpga.v} define two \textbf{wires}, \textbf{nibbleMS} and \textbf{nibbleLS} of width \textbf{[3:0]} to act as intermediary signals.
 	\item In the \textbf{nibbleDecode} modules, replace the \textbf{sw[3:0]} and \textbf{sw[7:4]} wires with \textbf{nibbleLS} and \textbf{nibbleMS}.	
 \end{itemize} 
 
 \noindent
 Now we have an instantiation for \textbf{displaySelect}, we need to add some logic for it to be useful.
 \begin{itemize}
-	\item Open \textbf{displaySelect.v} in your text editor. 
+	\item Open \textbf{displaySelect.v} in your text editor, and comment in all of the code. 
 	\item Find the \textbf{always @} block.
 	\begin{itemize}
 		\item \textbf{always @} is the header for a synchronous block of code.
