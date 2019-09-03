@@ -36,8 +36,7 @@ There are two parts required before the hardware meetup, installing software and
 
 To install the required software, follow the [install instructions](install.md).
 
-**Due to demand, we no longer have any boards left.** There may be some available for loan on the night, so send Josh an email and he will put you on the list for one. You are also more than welcome to build your own, follow the above linked repo and ask Josh if you have any questions.
-~~To get your hands on hardware, send an email to ```josh at josh a johnson dot com``` or follow the above linked repo and build your own!~~
+**Due to demand, we no longer have any boards left.** There may be some available for loan on the night, so send Josh an email at ```josh at joshajohnson dot com``` and he will put you on the list for one.
 
 Due to the expense of the FPGA boards, it will cost $50, and include a seven segment / DIP switch, LED matrix, and PMOD FeatherWings. This is at cost and will be yours to keep forever.
 
