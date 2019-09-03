@@ -248,7 +248,7 @@ Now we have an instantiation for \textbf{displaySelect}, we need to add some log
 		\item \textbf{always @} is the header for a synchronous block of code.
 		\item The list in parenthesis following \textbf{@} is the \textbf{Sensitivity List}. Whenever one of the signals in the sensitivity list changes, the block is run. It is similar to binding a callback function or mapping an interrupt in software terms. 
 	\end{itemize} 
-		\item Lets put \textbf{posedge clk} in the sensitivity list. This means each of positive edge - every time the \textbf{clk} goes from low to high - we will execute this block: \textbf{always @(posedge clk)}
+		\item Lets put \textbf{posedge clk} in the sensitivity list. This means each positive edge - every time the \textbf{clk} goes from low to high - we will execute this block: \textbf{always @(posedge clk)}
 		\item Now, we need to choose if we will display hexadecimal or decimal values depending on the state of \textbf{switch}. Add \textbf{switch} into the brackets of the if - else block. 
 		\item When in hex mode, all we need to do is route the DIP switch (\textbf{sw}) wires out of the module and back to the decoder as before. This can be achieved by adding \\ \textbf{nibbleMS $<=$ sw[7:4];}, along with the corresponding line for the least significant nibble in the if block. Note that assignments are different inside the always block - we are setting a register, not assigning a wire anymore! 
 		\begin{itemize}
