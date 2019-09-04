@@ -75,7 +75,7 @@ We will be using the not creatively named iCE40-feather board for this workshop.
 
 \begin{figure}[H]
 \begin{centering}
-	\includegraphics[width=\linewidth]{top_render.PNG}
+	\includegraphics[width=\linewidth]{top_render_annotated.PNG}
 	\caption{The iCE40-feather FPGA board being utilised.}
 \end{centering}
 \end{figure}
@@ -183,7 +183,7 @@ There are 7 \textbf{seg} output wires that control which LEDs are on or off, and
 \begin{itemize}
 	\item First, let's connect the stubbed-out \textbf{nibbleDecode} module into our design. 
 	\begin{itemize}
-		\item Find \textbf{nibbleDecode} in \textbf{wtfpga.v}. The module is instanticated, but not connected to anything. 
+		\item Find \textbf{nibbleDecode} in \textbf{wtfpga.v}. The module is instantiated, but not connected to anything. 
 		\item Connect the low 4 bits of our switches to the nibblein field: \textbf{.nibblein(sw[3:0]),}
 		\item Connect the 7 bits of output to the right most seven segement display: \textbf{.seg(disp1)}
 	\end{itemize}
@@ -200,11 +200,11 @@ There are 7 \textbf{seg} output wires that control which LEDs are on or off, and
 		\item For each case, we need the expected value of \textbf{nibbleIn}, and the correct value of \textbf{seg}, an array of bits which represent the segments on the display shown below.
 		\begin{figure}[H]
 		\begin{center}
-			\includegraphics[width=0.25\linewidth]{segments.png}
+			\includegraphics[width=0.2\linewidth]{segments.png}
 			\caption{Mapping of seven segment segments to position. Typically labeled A through G.}
 		\end{center} 
 	\end{figure}
-		\item Due to the display using a common anode, when a bit is '0', the corresponding segment is ON, and when a bit is a '1' the segment is OFF. Since that is confusing, we can use the $\sim$ operator for bitwise inversion such that '1' means the segment is illuminated. 
+		\item Due to the display having a common anode, when a bit is '0', the corresponding segment is ON, and when a bit is a '1' the segment is OFF. Since that is confusing, we can use the $\sim$ operator for bitwise inversion such that '1' means the segment is illuminated. 
 		\item For example, hex '1' looks like \textbf{$\sim$7'b0000110}. We can express this as \\ \textbf{4'h1: seg = $\sim$7'b0000110}, which roughly translates to:
 		\begin{table}[H]
 			\centering
@@ -216,7 +216,7 @@ There are 7 \textbf{seg} output wires that control which LEDs are on or off, and
 				\textbf{0000110}   & leds 1 and 2 illuminated &  &  & 
 			\end{tabular}
 		\end{table}
-		\item Figure out what you need to set for the remaining hex values using the diagram. 
+		\item Figure out what you need to set for the remaining hex values using the diagram. Yes, that means A-F need to be decoded in addition to 0-9. 
 	\end{itemize}
 	\item Due to how included files are handled in this lab, you will have to \textbf{make clean} before running \textbf{make prog} after editing a file other than \textbf{wtfpga.v}.
 	\item \textbf{make clean} then \textbf{make prog} your design. Does it work?
@@ -247,7 +247,7 @@ Now we have an instantiation for \textbf{displaySelect}, we need to add some log
 	\end{itemize} 
 		\item Lets put \textbf{posedge clk} in the sensitivity list. This means each positive edge - every time the \textbf{clk} goes from low to high - we will execute this block: \textbf{always @(posedge clk)}
 		\item Now, we need to choose if we will display hexadecimal or decimal values depending on the state of \textbf{switch}. Add \textbf{switch} into the brackets of the if - else block. 
-		\item When in hex mode, all we need to do is route the DIP switch (\textbf{sw}) wires out of the module and back to the decoder as before. This can be achieved by adding \\ \textbf{nibbleMS $<=$ sw[7:4];}, along with the corresponding line for the least significant nibble in the if block. Note that assignments are different inside the always block - we are setting a register, not assigning a wire anymore! 
+		\item When in hex mode, all we need to do is route the DIP switch (\textbf{sw}) wires out of the module and back to the decoder as before. This can be achieved by adding \\ \textbf{nibbleMS $<=$ sw[7:4];} and \textbf{nibbleLS $<=$ sw[3:0];} in the if block. Note that assignments are different inside the always block - we are setting a register, not assigning a wire anymore! 
 		\begin{itemize}
 			\item You may be wondering what that strange \textbf{$<=$} sign is, and why is isn't a \textbf{=} like you typically see in most programming languages?
 			\item \textbf{$<=$} is a \textbf{non blocking} assignment, and means that in an always block, every line will be executed in parallel. 
