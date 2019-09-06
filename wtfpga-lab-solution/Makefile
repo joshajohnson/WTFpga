@@ -1,5 +1,5 @@
 PROJ = wtfpga
-ADD_SRC =
+ADD_SRC = clockDiv.v displayMux.v displaySelect.v nibbleDecode.v
 
 PIN_DEF = feather.pcf
 DEVICE = up5k

@@ -218,8 +218,7 @@ There are 7 \textbf{seg} output wires that control which LEDs are on or off, and
 		\end{table}
 		\item Figure out what you need to set for the remaining hex values using the diagram. Yes, that means A-F need to be decoded in addition to 0-9. 
 	\end{itemize}
-	\item Due to how included files are handled in this lab, you will have to \textbf{make clean} before running \textbf{make prog} after editing a file other than \textbf{wtfpga.v}.
-	\item \textbf{make clean} then \textbf{make prog} your design. Does it work?
+	\item \textbf{make prog} your design. Does it work?
 \end{itemize}
 \section{Registers}
 While there is so much more to combinatorial logic than we actually touched on, let's move on to a new concept - registers. Assignments are excellent at connecting blocks together, but they're more similar to pass paramaters than actual variables. Registers allow you to capture and store data for repeated or later use. \\
@@ -254,7 +253,7 @@ Now we have an instantiation for \textbf{displaySelect}, we need to add some log
 			\item On the other hand, \textbf{=} is a \textbf{blocking} assignment, and ensures that the following line of code will only be executed after it's previous line has been executed. 
 			\item We will cover this in more detail in next month's meetup.
 		\end{itemize}
-		\item Build this design with \textbf{make clean} then \textbf{make prog} and ensure it works so far. The display should function as normal when the switch is in the \textbf{1} position, but should be static when in the \textbf{0} position. 
+		\item Build this design with \textbf{make prog} and ensure it works so far. The display should function as normal when the switch is in the \textbf{1} position, but should be static when in the \textbf{0} position. 
 	\end{itemize}
 	To implement the decimal decoding, we need to determine what digit needs to be shown on each display. In software, a straightforward implementation would involve taking the number modulo 10 to find the digit in the ones position, and then subtracting that from the total number to find the value in the tens column.  However, division and modulo operations are computationally expensive, and for reasons we will not cover over should not be implemented on an FPGA though using the \textbf{/} and \textbf{\%} operators.
 	
@@ -263,7 +262,7 @@ Now we have an instantiation for \textbf{displaySelect}, we need to add some log
 	\begin{itemize}
 		\item Uncomment the lines below "determine value to display in most significant display". It compares the number from the DIP switch to 90, 80, etc, and sets \textbf{nibbleMS} which is then displayed in the tens position. Complete the rest of the statements. 
 		\item Complete the calculation of \textbf{nibbleLS} through inserting the correct values into the incomplete calculation. Hint: implement the sentence above these dot points.
-		\item \textbf{make clean} then \textbf{make prog} to upload the updated gateware to the FPGA. Move the slide switch up into the \textbf{0} position and confirm that it decodes to decimal correctly. What happens when you count past 99? How can we solve this?
+		\item \textbf{make prog} to upload the updated gateware to the FPGA. Move the slide switch up into the \textbf{0} position and confirm that it decodes to decimal correctly. What happens when you count past 99? How can we solve this?
 	\end{itemize}
 	One method of resolving this would to not allow the displayed number to go above 99. Another would be to only show the two lowest digits on the display. I'll show you how to implement the former.
 	\begin{itemize}
@@ -291,6 +290,7 @@ You've now completed the seven segment decoder, which uses most of the core conc
 	\item Modify the design to PWM fade the LEDs. 
 	\item Modify \textbf{dispDecode.v} along with \textbf{wtfpga.v} to allow more than just hexadecimal numbers to be displayed.
 	\item Examine the \textbf{displayMux.v} file. What does it do? How does it seem to work? Can you dim the display? 
+	\item Look through the makefile and see if you can figure out how everything connects to each other, and if there are any interesting options of the tools we are not currently using.
 	\item Turn the display into a countdown timer, wherein you set a number on the display, and then move the slide switch to begin the countdown. For even more of a challenge, once the timer has reached 0, flash the display.
 	\item Have a chat to Josh about the design and assembly of the iCE40-feather and how FPGA implementation differs from microcontrollers. For those interested, the design files are available at \url{github.com/joshajohnson/iCE40-feather}, and additionally a PDF schematic is available in the \textbf{WTFpga/docs} folder.
 \end{itemize}

@@ -1,3 +1,6 @@
+`ifndef _nibbleDecode_v_
+`define _nibbleDecode_v_
+
 `default_nettype none
 
 module nibbleDecode(
@@ -15,3 +18,5 @@ module nibbleDecode(
         endcase
         end 
 endmodule
+
+`endif

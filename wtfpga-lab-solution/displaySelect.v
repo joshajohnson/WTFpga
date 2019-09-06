@@ -1,3 +1,6 @@
+`ifndef _displaySelect_v_
+`define _displaySelect_v_
+
 `default_nettype none
 
 module displaySelect(
@@ -53,3 +56,5 @@ module displaySelect(
         end
     end
 endmodule
+
+`endif

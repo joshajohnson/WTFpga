@@ -1,3 +1,6 @@
+`ifndef _displayMux_v_
+`define _displayMux_v_
+
 `default_nettype none
 
 module displayMux(
@@ -27,3 +30,5 @@ module displayMux(
 	end
 
 endmodule
+
+`endif

@@ -1,3 +1,6 @@
+`ifndef _clockDiv_v_
+`define _clockDiv_v_
+
 `default_nettype none
 
 module clockDiv(
@@ -12,3 +15,5 @@ module clockDiv(
 		counter <= counter+1;
 	
 endmodule
+
+`endif
