@@ -228,7 +228,7 @@ Whilst in previous editions of this workshop a calculator was implemented to dem
 
 \begin{itemize}
 	\item Open \textbf{wtfpga.v} in your text editor. 
-	\item Un-comment the instantiation of \textbf{displaySelect}..
+	\item Un-comment the instantiation of \textbf{displaySelect}.
 	\item We will use \textbf{displaySelect} to take the binary value of the DIP switches \textbf{sw}, along with the state of the \textbf{switch} on the left of the seven segment display, to output either decimal or hexadecimal values through \textbf{nibbleMS} and \textbf{nibbleLS} to display on the seven segment display. 
 	\item Instead of connecting the switches directly to the decoders, we need to route them through the \textbf{displaySelect} module. 
 	\item In \textbf{wtfpga.v} define two \textbf{wires}, \textbf{nibbleMS} and \textbf{nibbleLS} of width \textbf{[3:0]} to act as intermediary signals.
@@ -266,8 +266,8 @@ Now we have an instantiation for \textbf{displaySelect}, we need to add some log
 	\end{itemize}
 	One method of resolving this would to not allow the displayed number to go above 99. Another would be to only show the two lowest digits on the display. I'll show you how to implement the former.
 	\begin{itemize}
-		\item First, below the module definition, instantiate a register of width 8 called dispNum which will hold the value displayed. You can do this, and set it's initial state to 0 with: \\ \textbf{reg [7:0] dispNum = 0;}
-		\item Now, directly between the \textbf{end else begin} and \textbf{if (dispNum $\ge$ 7'd90) begin} lines, we need to add an if statement to do the following: \\ 
+		\item First, below the module definition at the top of the file, instantiate a register of width 8 called dispNum which will hold the value displayed. You can do this, and set it's initial state to 0 with: \\ \textbf{reg [7:0] dispNum = 0;}
+		\item Now, directly between the \textbf{end else begin} and \textbf{if (sw $\ge$ 7'd90) begin} lines, we need to add an if statement to do the following: \\ 
 		\textbf{if (sw $\le$ 99) begin}\\
 		set \textbf{dispNum} equal to \textbf{sw}\\
 		\textbf{end else begin}\\
